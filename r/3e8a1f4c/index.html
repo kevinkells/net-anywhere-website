@@ -382,6 +382,13 @@
       top: -1px;
     }
 
+    .date {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-weight: 400;
+      margin-left: 0.35rem;
+    }
+
     .investor-quote {
       font-size: 0.83rem;
       color: var(--text-dim);
@@ -458,17 +465,21 @@
 
         <div class="list-label achieved">Demonstrated on hardware</div>
         <ul class="achieved-list">
-          <li>4-node BLE Coded PHY mesh relay, indoors, multiple hops <span class="measured">measured</span></li>
-          <li>Outdoor range: 35 m at +3 dBm, 88 m at +20 dBm (1M PHY), NYC streets <span class="measured">measured</span></li>
-          <li>BLE duty-cycled idle: ~0.42 mW target; continuous ESP-BLE-MESH: ~20 mW <span class="measured">measured</span></li>
-          <li>WiFi soft-AP draw: ~200–400 mW burst; 10 F supercap sustains ~60–90 s window <span class="measured">measured</span></li>
-          <li>BLE + WiFi coexistence failure characterized; time-multiplex workaround confirmed <span class="measured">measured</span></li>
+          <li>4-node BLE mesh relay proven indoors: shielded node reached over 18 ft + 90° turn via relay <span class="measured">measured</span><span class="date">Mar 31, 2026</span></li>
+          <li>Outdoor range at 56th &amp; 1st Ave, NYC: 35 m at +3 dBm, 88 m at +20 dBm (1M PHY) <span class="measured">measured</span><span class="date">Mar 31, 2026</span></li>
+          <li>BLE + WiFi simultaneous operation impossible on ESP32-C6 — WPA2 handshake fails under active BLE mesh traffic; time-multiplex workaround confirmed functional <span class="measured">measured</span><span class="date">Mar 30, 2026</span></li>
+        </ul>
+
+        <div class="list-label specs">Estimated from datasheets (not yet bench-measured)</div>
+        <ul class="spec-list">
+          <li>BLE duty-cycled idle: ~0.42 mW target; continuous ESP-BLE-MESH: ~20 mW (ESP32-C6 datasheet)</li>
+          <li>WiFi soft-AP draw: ~200–400 mW burst; 10 F supercap sustains ~60–90 s window (calculated)</li>
         </ul>
 
         <div class="list-label inprogress">In progress</div>
         <ul class="inprogress-list">
-          <li>Solar wiring integration — harvest loop not yet closed on bench</li>
-          <li>Outdoor power-under-sun measurements pending</li>
+          <li>Solar wiring integration — harvest loop not yet closed on bench <span class="date">started Apr 1, 2026</span></li>
+          <li>Power-under-sun measurements pending (supercap charge rate, overnight survival)</li>
         </ul>
 
         <p class="investor-quote">"We have a working 4-node mesh with measured range-per-hop and power draw from real hardware in the field. The harvest loop is the next gate."</p>
