@@ -273,6 +273,25 @@
       font-weight: 600;
     }
 
+    .meta-value.cost {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .phase-row.planned .meta-value.cost {
+      color: rgba(255,255,255,0.45);
+    }
+
+    .phase-row.next .meta-value.cost {
+      color: rgba(255,255,255,0.9);
+    }
+
+    .phase-row.done .meta-value.cost {
+      color: #ffffff;
+    }
+
     .phase-row.planned .meta-value {
       color: rgba(255,255,255,0.35);
     }
@@ -453,11 +472,15 @@
         <div class="phase-meta">
           <div class="meta-item">
             <span class="meta-label">Cost</span>
-            <span class="meta-value">~$250 in components</span>
+            <span class="meta-value cost">~$250</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">Timeline</span>
-            <span class="meta-value">Started Mar 2026 &mdash; ongoing</span>
+            <span class="meta-label">Started</span>
+            <span class="meta-value">Mar 5, 2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Target completion</span>
+            <span class="meta-value">Apr 5, 2026</span>
           </div>
         </div>
 
@@ -504,11 +527,15 @@
         <div class="phase-meta">
           <div class="meta-item">
             <span class="meta-label">Estimated cost</span>
-            <span class="meta-value">~$200–500 (board + assembly)</span>
+            <span class="meta-value cost">~$200–500</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">Estimated time</span>
-            <span class="meta-value">3–4 weeks design + fab turn</span>
+            <span class="meta-label">Design &amp; send</span>
+            <span class="meta-value">by Apr 19, 2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. completion</span>
+            <span class="meta-value">~May 26, 2026</span>
           </div>
         </div>
 
@@ -544,11 +571,15 @@
         <div class="phase-meta">
           <div class="meta-item">
             <span class="meta-label">Estimated cost</span>
-            <span class="meta-value">~$2–5k for 25–50 units</span>
+            <span class="meta-value cost">~$2–5k</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">Estimated time</span>
-            <span class="meta-value">6–10 weeks (design + HDI fab + assembly)</span>
+            <span class="meta-label">Duration</span>
+            <span class="meta-value">6–10 weeks</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. completion</span>
+            <span class="meta-value">Jul–Aug 2026</span>
           </div>
         </div>
 
@@ -584,11 +615,15 @@
         <div class="phase-meta">
           <div class="meta-item">
             <span class="meta-label">Estimated NRE</span>
-            <span class="meta-value">$30–50k</span>
+            <span class="meta-value cost">$30–50k</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">Estimated time</span>
+            <span class="meta-label">Duration</span>
             <span class="meta-value">3–6 months</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. completion</span>
+            <span class="meta-value">Q4 2026 – Q1 2027</span>
           </div>
         </div>
 
@@ -624,15 +659,19 @@
         <div class="phase-meta">
           <div class="meta-item">
             <span class="meta-label">Estimated NRE</span>
-            <span class="meta-value">$500k – $2M+</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Estimated time</span>
-            <span class="meta-value">12–24 months</span>
+            <span class="meta-value cost">$500k – $2M+</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">Unit cost at volume</span>
-            <span class="meta-value">&lt;$1/node target</span>
+            <span class="meta-value cost">&lt;$1 / node</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Duration</span>
+            <span class="meta-value">12–24 months</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. completion</span>
+            <span class="meta-value">2028+ (funding-dependent)</span>
           </div>
         </div>
 
