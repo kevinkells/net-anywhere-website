@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NetAnywhere — Hardware De-Risk Roadmap</title>
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow, noarchive">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #38bdf8;
+      --surface: rgba(255, 255, 255, 0.12);
+      --surface-strong: rgba(255, 255, 255, 0.18);
+      --border: rgba(255, 255, 255, 0.2);
+      --text: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.72);
+      --text-dim: rgba(255, 255, 255, 0.45);
+      --accent: #ffffff;
+
+      --status-done-bg: rgba(52, 211, 153, 0.22);
+      --status-done-border: rgba(52, 211, 153, 0.5);
+      --status-done-text: #a7f3d0;
+
+      --status-active-bg: rgba(251, 191, 36, 0.2);
+      --status-active-border: rgba(251, 191, 36, 0.5);
+      --status-active-text: #fde68a;
+
+      --status-next-bg: rgba(255, 255, 255, 0.14);
+      --status-next-border: rgba(255, 255, 255, 0.28);
+      --status-next-text: rgba(255, 255, 255, 0.85);
+
+      --status-planned-bg: rgba(255, 255, 255, 0.07);
+      --status-planned-border: rgba(255, 255, 255, 0.15);
+      --status-planned-text: rgba(255, 255, 255, 0.5);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(160deg, #38bdf8 0%, #0ea5e9 40%, #0284c7 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* --- Nav --- */
+    nav {
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 860px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .confidential-tag {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.25rem 0.75rem;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* --- Header --- */
+    .page-header {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 2rem;
+    }
+
+    .page-header h1 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .page-header p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      line-height: 1.7;
+    }
+
+    /* --- Timeline --- */
+    .timeline {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .phase-row {
+      display: flex;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    /* Connector line */
+    .phase-row:not(:last-child) .connector {
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      width: 2px;
+      bottom: -1.5rem;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(255,255,255,0.1));
+    }
+
+    .phase-row.planned:not(:last-child) .connector {
+      background: linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+    }
+
+    /* Node dot */
+    .phase-node {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      position: relative;
+      z-index: 1;
+      margin-top: 0;
+    }
+
+    .phase-row.done .phase-node {
+      background: rgba(52, 211, 153, 0.3);
+      border: 2px solid rgba(52, 211, 153, 0.6);
+      color: #a7f3d0;
+    }
+
+    .phase-row.active .phase-node {
+      background: rgba(251, 191, 36, 0.25);
+      border: 2px solid rgba(251, 191, 36, 0.6);
+      color: #fde68a;
+      box-shadow: 0 0 16px rgba(251, 191, 36, 0.25);
+    }
+
+    .phase-row.next .phase-node {
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.8);
+    }
+
+    .phase-row.planned .phase-node {
+      background: rgba(255,255,255,0.06);
+      border: 2px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* Card */
+    .phase-card {
+      flex: 1;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .phase-row.active .phase-card {
+      background: var(--surface-strong);
+      border-color: rgba(251, 191, 36, 0.3);
+    }
+
+    .phase-row.planned .phase-card {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .phase-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.2rem;
+    }
+
+    .phase-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .phase-row.planned .phase-name {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .status-badge {
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      padding: 0.2rem 0.65rem;
+      white-space: nowrap;
+    }
+
+    .status-done {
+      background: var(--status-done-bg);
+      border: 1px solid var(--status-done-border);
+      color: var(--status-done-text);
+    }
+
+    .status-active {
+      background: var(--status-active-bg);
+      border: 1px solid var(--status-active-border);
+      color: var(--status-active-text);
+    }
+
+    .status-next {
+      background: var(--status-next-bg);
+      border: 1px solid var(--status-next-border);
+      color: var(--status-next-text);
+    }
+
+    .status-planned {
+      background: var(--status-planned-bg);
+      border: 1px solid var(--status-planned-border);
+      color: var(--status-planned-text);
+    }
+
+    .key-question {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .phase-row.planned .key-question {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .spec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .spec-list li {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      padding-left: 1.1rem;
+      position: relative;
+    }
+
+    .spec-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-dim);
+    }
+
+    .phase-row.planned .spec-list li {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .achieved-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .achieved-list li {
+      font-size: 0.875rem;
+      color: var(--status-done-text);
+      padding-left: 1.4rem;
+      position: relative;
+    }
+
+    .achieved-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      font-size: 0.75rem;
+    }
+
+    .inprogress-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .inprogress-list li {
+      font-size: 0.875rem;
+      color: var(--status-active-text);
+      padding-left: 1.4rem;
+      position: relative;
+    }
+
+    .inprogress-list li::before {
+      content: '●';
+      position: absolute;
+      left: 0;
+      font-size: 0.55rem;
+      top: 0.35em;
+    }
+
+    .investor-quote {
+      font-size: 0.83rem;
+      color: var(--text-dim);
+      font-style: italic;
+      line-height: 1.6;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 0.9rem;
+      margin-top: 0.2rem;
+    }
+
+    .phase-row.planned .investor-quote {
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* --- Footer --- */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 600px) {
+      .page-header { padding: 2.5rem 1.25rem 1.5rem; }
+      .timeline { padding: 2rem 1.25rem 4rem; }
+      .phase-card { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="logo">NetAnywhere</span>
+    <span class="confidential-tag">Confidential</span>
+  </nav>
+
+  <div class="page-header">
+    <h1>Hardware De-Risk Roadmap</h1>
+    <p>A phased strategy for validating the physics and manufacturing path of the NetAnywhere node — from breadboard through production-grade wafer-level packaging.</p>
+  </div>
+
+  <div class="timeline">
+
+    <!-- Phase 0 -->
+    <div class="phase-row done">
+      <div class="connector"></div>
+      <div class="phase-node">0</div>
+      <div class="phase-card">
+        <div class="card-top">
+          <div>
+            <div class="phase-label">Phase 0 &mdash; Breadboard</div>
+            <div class="phase-name">1BLE &mdash; ESP32-C6 + Solar</div>
+          </div>
+          <span class="status-badge status-done">In Progress</span>
+        </div>
+        <p class="key-question">Does the solar harvest → store → relay loop work at all? What range and power numbers do we actually see?</p>
+        <ul class="achieved-list">
+          <li>4-node BLE Coded PHY mesh relay demonstrated indoors</li>
+          <li>Outdoor range: ~35 m at +3 dBm, ~88 m at +20 dBm (1M PHY)</li>
+          <li>BLE + WiFi coexistence characterized; time-multiplex workaround confirmed</li>
+        </ul>
+        <ul class="inprogress-list">
+          <li>Solar wiring integration (Step 4) — harvest loop not yet closed on bench</li>
+          <li>Outdoor power-under-sun measurements pending</li>
+        </ul>
+        <p class="investor-quote">"We have a working 4-node mesh. We know our range-per-hop and power draw numbers from real hardware in the field."</p>
+      </div>
+    </div>
+
+    <!-- Phase 0.5 -->
+    <div class="phase-row next">
+      <div class="connector"></div>
+      <div class="phase-node">0.5</div>
+      <div class="phase-card">
+        <div class="card-top">
+          <div>
+            <div class="phase-label">Phase 0.5 &mdash; Compact PCB</div>
+            <div class="phase-name">Schematic Validation &mdash; Standard SMT</div>
+          </div>
+          <span class="status-badge status-next">Next</span>
+        </div>
+        <p class="key-question">Does the schematic close on a properly designed PCB, with a solar cell matched to near-target dimensions?</p>
+        <ul class="spec-list">
+          <li>~40–50 mm square, standard 2-layer FR4, QFN / SOIC packages</li>
+          <li>Solar cell sized to approximate the 25 × 25 mm target harvest area</li>
+          <li>Easily probeable — validates harvester topology, supercap sizing, and firmware before committing to HDI</li>
+          <li>Fast-turn fabrication: PCBWay or equivalent, ~$10/board, ~1 week</li>
+        </ul>
+        <p class="investor-quote">"The breadboard proves the physics; the 2-layer PCB proves the schematic. We de-risk the circuit design before committing to expensive HDI rules."</p>
+      </div>
+    </div>
+
+    <!-- Phase I -->
+    <div class="phase-row planned">
+      <div class="connector"></div>
+      <div class="phase-node">I</div>
+      <div class="phase-card">
+        <div class="card-top">
+          <div>
+            <div class="phase-label">Phase I &mdash; HDI Micro-PCBA</div>
+            <div class="phase-name">The "Micro-PCBA Sandwich"</div>
+          </div>
+          <span class="status-badge status-planned">Planned</span>
+        </div>
+        <p class="key-question">Does the physics close at the exact 25 × 25 mm X-Y form factor, holding in your hand?</p>
+        <ul class="spec-list">
+          <li>25 × 25 mm HDI PCB, WLCSP silicon (ESP32-C6 WLCSP or nRF52840 WLCSP)</li>
+          <li>PMIC: BQ25570 DSBGA or e-peas AEM10941; supercap: SMD EDLC 0.9 mm profile</li>
+          <li>Thin-film PV bonded to top and bottom faces; total thickness ~3.5–4.2 mm</li>
+          <li>Assembly: standard SMT pick-and-place at MacroFab or Screaming Circuits; ~$2–5k for 25–50 units</li>
+        </ul>
+        <p class="investor-quote">"We have a functional, scatter-deployable 25 × 25 mm node you can hold today. Shrinking from 4 mm to 1 mm is a solved engineering problem — we are not asking you to take a physics risk."</p>
+      </div>
+    </div>
+
+    <!-- Phase II -->
+    <div class="phase-row planned">
+      <div class="connector"></div>
+      <div class="phase-node">II</div>
+      <div class="phase-card">
+        <div class="card-top">
+          <div>
+            <div class="phase-label">Phase II &mdash; Bare Die on Flex</div>
+            <div class="phase-name">Chip-on-Flex (CoF)</div>
+          </div>
+          <span class="status-badge status-planned">Planned</span>
+        </div>
+        <p class="key-question">Can we hit the ~1 mm Z-axis profile required for aerodynamic scatter deployment?</p>
+        <ul class="spec-list">
+          <li>50 µm polyimide flex substrate with RDL antenna; bare dies via Micross / SemiDice</li>
+          <li>Energy storage: CAP-XX ultra-thin prismatic supercap pouch (~0.4 mm)</li>
+          <li>Passives: Silicon Capacitors (SiCaps) or 01005 for zero Z-height impact</li>
+          <li>Assembly at OSAT: QP Technologies or Promex Industries; NRE ~$30–50k</li>
+          <li>Total target thickness: ~0.95–1.15 mm</li>
+        </ul>
+        <p class="investor-quote">"Phase I proved the physics. Phase II proves the form factor. The supply chain here maps directly to the high-volume reel-to-reel manufacturing that hits $1/node."</p>
+      </div>
+    </div>
+
+    <!-- Phase III -->
+    <div class="phase-row planned">
+      <div class="phase-node">III</div>
+      <div class="phase-card">
+        <div class="card-top">
+          <div>
+            <div class="phase-label">Phase III &mdash; Custom Silicon</div>
+            <div class="phase-name">Fan-Out Wafer-Level Packaging (FOWLP)</div>
+          </div>
+          <span class="status-badge status-planned">Planned</span>
+        </div>
+        <p class="key-question">Can we achieve sub-$1/node unit economics at scale with full wafer-level integration?</p>
+        <ul class="spec-list">
+          <li>Custom RF CMOS die (~5 mm², 180 nm) + MCU die + PMIC die embedded in mold compound</li>
+          <li>On-package RDL routing and 2.4 GHz RDL antenna; no flex PCB</li>
+          <li>Thin-film PV bonded at wafer scale to top and bottom; SiO₂ hermetic passivation</li>
+          <li>Prototype partners: IMEC, CEA-Leti, IHP Microelectronics; scale via ASE Group</li>
+          <li>NRE: high (hundreds of thousands to millions); unit cost target &lt;$1 at volume</li>
+        </ul>
+        <p class="investor-quote">"Phases I and II retired the technical risks. Phase III is a pure capital-scaling play. This is the inflection point where NetAnywhere becomes a deployable macro-environmental platform."</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2026 NetAnywhere &mdash; Creative Implements, LLC &mdash; Patent pending &mdash; Confidential
+  </footer>
+
+</body>
+</html>
