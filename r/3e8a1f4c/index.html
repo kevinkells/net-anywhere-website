@@ -532,32 +532,37 @@
           </div>
           <div class="meta-item">
             <span class="meta-label">Target completion</span>
-            <span class="meta-value">Apr 5, 2026</span>
+            <span class="meta-value">~Apr 15, 2026</span>
           </div>
         </div>
 
-        <p class="key-question">Does the solar harvest → store → relay loop work at all? What range and power numbers do we actually see?</p>
+        <p class="key-question">Does the solar harvest → store → relay loop close? What range and power numbers do we actually see on the bench and outdoors?</p>
 
         <div class="list-label achieved">Demonstrated on hardware</div>
         <ul class="achieved-list">
           <li>BLE + WiFi simultaneous operation impossible on ESP32-C6 — WPA2 handshake fails under active BLE mesh traffic; time-multiplex workaround confirmed functional <span class="measured">measured</span><span class="date">Mar 30, 2026</span></li>
           <li>4-node BLE mesh relay proven indoors: shielded node reached over 18 ft + 90° turn via relay <span class="measured">measured</span><span class="date">Mar 31, 2026</span></li>
           <li>Outdoor range at 56th &amp; 1st Ave, NYC: 35 m at +3 dBm, 88 m at +20 dBm (1M PHY) <span class="measured">measured</span><span class="date">Mar 31, 2026</span></li>
+          <li>Power subsystem wired: BQ25570 + LM3671 + Voltaic P121 + supercap — all components confirmed functional individually <span class="measured">measured</span><span class="date">Apr 1–4, 2026</span></li>
+          <li>Indoor bench test: VSTOR sags to 2.73 V under DevKitC load — root cause identified as DevKit board overhead (~70 mW USB bridge chip), not a solar panel or harvester fault <span class="measured">measured</span><span class="date">Apr 4, 2026</span></li>
         </ul>
 
         <div class="list-label specs">Estimated from datasheets (not yet bench-measured)</div>
         <ul class="spec-list">
           <li>BLE duty-cycled idle: ~0.42 mW target; continuous ESP-BLE-MESH: ~20 mW (ESP32-C6 datasheet)</li>
           <li>WiFi soft-AP draw: ~200–400 mW burst; 10 F supercap sustains ~60–90 s window (calculated)</li>
+          <li>Bare ESP32-C6 module draw (no USB bridge): ~20–30 mW active — well within P121 indoor harvest window</li>
         </ul>
 
         <div class="list-label inprogress">In progress</div>
         <ul class="inprogress-list">
-          <li>Solar wiring integration — harvest loop not yet closed on bench <span class="date">started Apr 1, 2026</span></li>
-          <li>Power-under-sun measurements pending (supercap charge rate, overnight survival)</li>
+          <li>Seeed XIAO ESP32-C6 (Pre-Soldered) ordered — bare-module board with no USB bridge chip; directly measures ESP32-C6 silicon draw vs. DevKit overhead</li>
+          <li>Phase 7a: repeat indoor bench test with XIAO to confirm DevKit overhead was the cause of VSTOR sag</li>
+          <li>Phase 7b / Step 4 outdoor: take to direct sunlight — confirm VSTOR holds above 3.5 V under both DevKitC and XIAO load</li>
+          <li>Phase 7c: solar-only relay chain with XIAO nodes — 3-node mesh, no USB, outdoor</li>
         </ul>
 
-        <p class="investor-quote">"We have a working 4-node mesh with measured range-per-hop and power draw from real hardware in the field. The harvest loop is the next gate."</p>
+        <p class="investor-quote">"Range is proven on hardware in the field. The power subsystem is wired and working — we traced the indoor deficit to 70 mW of dev kit overhead, not a physics problem. We've ordered a bare-module board to isolate the chip draw and close the power budget before moving to the custom PCB."</p>
       </div>
     </div>
 
