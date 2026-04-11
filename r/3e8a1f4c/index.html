@@ -562,7 +562,7 @@
           <li>Phase 7c: solar-only relay chain with XIAO nodes — 3-node mesh, no USB, outdoor</li>
         </ul>
 
-        <p class="investor-quote">"Range is proven on hardware in the field. The power subsystem is wired and working — we traced the indoor deficit to 70 mW of dev kit overhead, not a physics problem. We've ordered a bare-module board to isolate the chip draw and close the power budget before moving to the custom PCB."</p>
+        <p class="investor-quote">"Range is proven on hardware in the field. The power subsystem is wired and working &mdash; we traced the indoor deficit to 70 mW of dev kit overhead, not a physics problem. The ESP32-C6 established the radio baseline; the Nordic dual-chip breadboard is next."</p>
       </div>
     </div>
 
@@ -605,7 +605,7 @@
           <li>Test passes when a message sent from Phone 1 arrives at Phone 2 with the relay node as the only path</li>
         </ul>
 
-        <p class="investor-quote">"Phase 0 proved the power loop and range. Phase 1 proves the product works: two phones, out of range of each other, communicating through a solar-powered relay node over radio. No infrastructure. No wires. This is the demonstration."</p>
+        <p class="investor-quote">"Phase 0 proved the power loop and range. Phase 1 proves the product works: two phones, out of range of each other, communicating through a relay node over radio. No infrastructure. USB-powered for now &mdash; solar comes in Phase 2 on a real circuit board, not a dev board."</p>
       </div>
     </div>
 
@@ -619,7 +619,7 @@
             <div class="phase-node-inline">Phase 2</div>
             <div class="phase-label">Nordic nRF5340+nRF7002 Surface-Mount (SMT) Board</div>
             <div class="phase-name">Solar-Powered Node</div>
-            <div class="unit-description">A green circuit board about 2 inches square &mdash; larger than a Triscuit, smaller than a playing card &mdash; with nRF5340 + nRF7002 in QFN packages and solder joints. A solar cell matched to the 25 &times; 25 mm target harvest area sits on top. Still clearly a prototype PCB; all components are accessible for probing and debugging.</div>
+            <div class="unit-description">A green circuit board about 2 inches square &mdash; larger than a Triscuit, smaller than a playing card &mdash; with nRF5340 + nRF7002 in QFN packages, a solar cell, and a supercap. No dev board overhead &mdash; just the chips and the power circuit. This is the first board where solar validation is meaningful.</div>
           </div>
           <div class="badge-group">
             <span class="status-badge status-planned">Planned</span>
@@ -637,17 +637,18 @@
           </div>
         </div>
 
-        <p class="key-question">Does the Nordic dual-chip schematic close on a properly designed PCB, with a solar cell sized to near-target dimensions?</p>
+        <p class="key-question">Does the Nordic dual-chip node run on solar? This is the first board with no dev kit overhead &mdash; real chips, real power budget.</p>
 
         <div class="list-label specs">Approach</div>
         <ul class="spec-list">
-          <li>~40–50 mm square, standard 2-layer FR4, nRF5340 + nRF7002 in QFN packages</li>
-          <li>Solar cell sized to approximate the 25 &times; 25 mm target harvest area</li>
-          <li>Fully probeable &mdash; validates harvester topology, SPI interconnect, PTA wiring, and firmware before committing to HDI</li>
+          <li>~40&ndash;50 mm square, standard 2-layer FR4, nRF5340 + nRF7002 in QFN packages &mdash; no extra LEDs, regulators, or USB bridges</li>
+          <li>Solar cell + supercap + BQ25570 harvester on board &mdash; the complete power circuit</li>
+          <li>First real solar validation: does the node stay alive on ambient light with no USB?</li>
+          <li>Fully probeable &mdash; all test points accessible for debugging before committing to HDI miniaturization</li>
           <li>Fast-turn fabrication at PCBWay or equivalent: ~$10/board, ~1 week</li>
         </ul>
 
-        <p class="investor-quote">"The breadboard proves the architecture; the 2-layer PCB proves the schematic. We de-risk the circuit before committing to expensive HDI design rules."</p>
+        <p class="investor-quote">"Phase 1 proved the architecture on dev boards. Phase 2 proves the power budget on a real circuit board &mdash; no dev kit overhead, no wasted current. If the node runs on solar here, the physics are closed. Miniaturization is next."</p>
       </div>
     </div>
 
