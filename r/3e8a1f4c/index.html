@@ -575,8 +575,8 @@
           <div>
             <div class="phase-node-inline">Phase 1</div>
             <div class="phase-label">Nordic Breadboard</div>
-            <div class="phase-name">nRF5340 + nRF7002 &mdash; Dual-Chip Coexistence</div>
-            <div class="unit-description">Two small module boards wired together on a breadboard with a solar panel and supercap. Same desk-and-park prototype form factor as Phase 0, but with separate RF paths for 802.15.4 and Wi-Fi &mdash; the architecture the product ships on.</div>
+            <div class="phase-name">End-to-End Proof of Concept</div>
+            <div class="unit-description">Three breadboard nodes. Two phones &mdash; one connected to each end node over Wi-Fi. A relay node in the middle. The phones send a message. It travels Phone &rarr; Wi-Fi &rarr; 802.15.4 &rarr; relay &rarr; 802.15.4 &rarr; Wi-Fi &rarr; Phone. When it arrives, the architecture is proven.</div>
           </div>
           <div class="badge-group">
             <span class="status-badge status-next">Next</span>
@@ -586,25 +586,26 @@
         <div class="phase-meta">
           <div class="meta-item">
             <span class="meta-label">Estimated cost</span>
-            <span class="meta-value cost">~$204</span>
+            <span class="meta-value cost">~$150</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">Duration</span>
-            <span class="meta-value">2–4 weeks</span>
+            <span class="meta-value">2&ndash;4 weeks</span>
           </div>
         </div>
 
-        <p class="key-question">Can 802.15.4 backbone relay and Wi-Fi phone access run simultaneously on every node? What does it actually cost in power?</p>
+        <p class="key-question">Do two Wi-Fi clients communicate end-to-end through an 802.15.4 relay on real hardware?</p>
 
-        <div class="list-label specs">Approach</div>
+        <div class="list-label specs">Setup</div>
         <ul class="spec-list">
-          <li>nRF7002 DK ($57.50) for bench development + PPK2 ($89) for cycle-accurate power profiling</li>
-          <li>Raytac MDBT53-DB-40 ($17.50) + nRF7002 EK ($19.74) for breadboard field node on solar</li>
-          <li>Hardware PTA between chips &mdash; the combination rated X (not supported) on ESP32-C6 should work here</li>
-          <li>PPK2 measures simultaneous 802.15.4 + Wi-Fi draw &mdash; the number that exists in no datasheet</li>
+          <li>3&times; Raytac MDBT53-DB-40 (nRF5340, 802.15.4 backbone); 2&times; nRF7002 EK (Wi-Fi 6, one per edge node)</li>
+          <li>Edge nodes run Wi-Fi SOFTAP + 802.15.4 simultaneously &mdash; the combination rated X (not supported) on the ESP32-C6</li>
+          <li>Relay node runs 802.15.4 only; bridges the two edges</li>
+          <li>nRF7002 DK provides J-Link programming for all modules</li>
+          <li>Test passes when a message sent from Phone 1 arrives at Phone 2 with the relay node as the only path</li>
         </ul>
 
-        <p class="investor-quote">"Phase 0 proved the power loop and range. Phase 1 proves the radio architecture &mdash; simultaneous mesh backbone and phone access on every node, measured on real hardware. This is the architecture the product ships on."</p>
+        <p class="investor-quote">"Phase 0 proved the power loop and range. Phase 1 proves the product works: two phones, out of range of each other, communicating through a solar-powered relay node over radio. No infrastructure. No wires. This is the demonstration."</p>
       </div>
     </div>
 
