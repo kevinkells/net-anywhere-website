@@ -499,7 +499,7 @@
 
   <div class="page-header">
     <h1>Hardware De-Risk Roadmap</h1>
-    <p>A phased strategy for validating the physics and manufacturing path of the NetAnywhere node — from breadboard through production-grade wafer-level packaging.</p>
+    <p>A phased strategy for validating the physics and manufacturing path of the NetAnywhere node &mdash; from breadboard through sellable product to production-grade wafer-level packaging.</p>
   </div>
 
   <div class="timeline">
@@ -566,17 +566,17 @@
       </div>
     </div>
 
-    <!-- Phase 0.5 -->
+    <!-- Phase 1 -->
     <div class="phase-row next">
       <div class="connector"></div>
-      <div class="phase-node">0.5</div>
+      <div class="phase-node">1</div>
       <div class="phase-card">
         <div class="card-top">
           <div>
-            <div class="phase-node-inline">Phase 0.5</div>
-            <div class="phase-label">Compact PCB</div>
-            <div class="phase-name">Schematic Validation &mdash; Standard SMT</div>
-            <div class="unit-description">A green circuit board about 2 inches square — larger than a Triscuit, smaller than a playing card — with visible chip packages and solder joints. A solar cell matched to the 25 × 25 mm target harvest area sits on top. Still clearly a prototype PCB; all components are accessible for probing and debugging.</div>
+            <div class="phase-node-inline">Phase 1</div>
+            <div class="phase-label">Nordic Breadboard</div>
+            <div class="phase-name">nRF5340 + nRF7002 &mdash; Dual-Chip Coexistence</div>
+            <div class="unit-description">Two small module boards wired together on a breadboard with a solar panel and supercap. Same desk-and-park prototype form factor as Phase 0, but with separate RF paths for 802.15.4 and Wi-Fi &mdash; the architecture the product ships on.</div>
           </div>
           <div class="badge-group">
             <span class="status-badge status-next">Next</span>
@@ -586,43 +586,39 @@
         <div class="phase-meta">
           <div class="meta-item">
             <span class="meta-label">Estimated cost</span>
-            <span class="meta-value cost">~$200–500</span>
+            <span class="meta-value cost">~$204</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">Design &amp; send</span>
-            <span class="meta-value">by Apr 19, 2026</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Est. completion</span>
-            <span class="meta-value">~May 26, 2026</span>
+            <span class="meta-label">Duration</span>
+            <span class="meta-value">2–4 weeks</span>
           </div>
         </div>
 
-        <p class="key-question">Does the schematic close on a properly designed PCB, with a solar cell sized to near-target dimensions?</p>
+        <p class="key-question">Can 802.15.4 backbone relay and Wi-Fi phone access run simultaneously on every node? What does it actually cost in power?</p>
 
         <div class="list-label specs">Approach</div>
         <ul class="spec-list">
-          <li>~40–50 mm square, standard 2-layer FR4, QFN / SOIC packages — no exotic assembly</li>
-          <li>Solar cell sized to approximate the 25 × 25 mm target harvest area</li>
-          <li>Fully probeable — validates harvester topology, supercap sizing, and firmware before committing to HDI</li>
-          <li>Fast-turn fabrication at PCBWay or equivalent: ~$10/board, ~1 week</li>
+          <li>nRF7002 DK ($57.50) for bench development + PPK2 ($89) for cycle-accurate power profiling</li>
+          <li>Raytac MDBT53-DB-40 ($17.50) + nRF7002 EK ($19.74) for breadboard field node on solar</li>
+          <li>Hardware PTA between chips &mdash; the combination rated X (not supported) on ESP32-C6 should work here</li>
+          <li>PPK2 measures simultaneous 802.15.4 + Wi-Fi draw &mdash; the number that exists in no datasheet</li>
         </ul>
 
-        <p class="investor-quote">"The breadboard proves the physics; the 2-layer PCB proves the schematic. We de-risk the circuit before committing to expensive HDI design rules."</p>
+        <p class="investor-quote">"Phase 0 proved the power loop and range. Phase 1 proves the radio architecture &mdash; simultaneous mesh backbone and phone access on every node, measured on real hardware. This is the architecture the product ships on."</p>
       </div>
     </div>
 
-    <!-- Phase I -->
+    <!-- Phase 2 -->
     <div class="phase-row planned">
       <div class="connector"></div>
-      <div class="phase-node">I</div>
+      <div class="phase-node">2</div>
       <div class="phase-card">
         <div class="card-top">
           <div>
-            <div class="phase-node-inline">Phase I</div>
-            <div class="phase-label">HDI Micro-PCBA</div>
-            <div class="phase-name">The "Micro-PCBA Sandwich"</div>
-            <div class="unit-description">A rigid square roughly the size of a Triscuit (~1.5 × 1.5 inches), about as thick as a stack of 3–4 credit cards. Solar film bonded to both faces. You can hold one between two fingers. This is the first unit built at close to the target footprint.</div>
+            <div class="phase-node-inline">Phase 2</div>
+            <div class="phase-label">Compact PCB</div>
+            <div class="phase-name">Schematic Validation &mdash; Nordic SMT</div>
+            <div class="unit-description">A green circuit board about 2 inches square &mdash; larger than a Triscuit, smaller than a playing card &mdash; with nRF5340 + nRF7002 in QFN packages and solder joints. A solar cell matched to the 25 &times; 25 mm target harvest area sits on top. Still clearly a prototype PCB; all components are accessible for probing and debugging.</div>
           </div>
           <div class="badge-group">
             <span class="status-badge status-planned">Planned</span>
@@ -632,43 +628,85 @@
         <div class="phase-meta">
           <div class="meta-item">
             <span class="meta-label">Estimated cost</span>
-            <span class="meta-value cost">~$2–5k</span>
+            <span class="meta-value cost">~$200–500</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">Duration</span>
-            <span class="meta-value">6–10 weeks</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Est. completion</span>
-            <span class="meta-value">Jul–Aug 2026</span>
+            <span class="meta-value">~5 weeks (design + fab)</span>
           </div>
         </div>
 
-        <p class="key-question">Does the power budget close when the node fits in the palm of your hand?</p>
+        <p class="key-question">Does the Nordic dual-chip schematic close on a properly designed PCB, with a solar cell sized to near-target dimensions?</p>
 
-        <div class="list-label specs">Architecture</div>
+        <div class="list-label specs">Approach</div>
         <ul class="spec-list">
-          <li>25 × 25 mm HDI PCB; WLCSP silicon (ESP32-C6 WLCSP or nRF52840 WLCSP)</li>
-          <li>PMIC: BQ25570 DSBGA or e-peas AEM10941; supercap: SMD EDLC, 0.9 mm profile</li>
-          <li>Thin-film PV bonded to top and bottom faces; total thickness ~3.5–4.2 mm</li>
-          <li>Assembly: standard SMT pick-and-place at MacroFab or Screaming Circuits</li>
+          <li>~40–50 mm square, standard 2-layer FR4, nRF5340 + nRF7002 in QFN packages</li>
+          <li>Solar cell sized to approximate the 25 &times; 25 mm target harvest area</li>
+          <li>Fully probeable &mdash; validates harvester topology, SPI interconnect, PTA wiring, and firmware before committing to HDI</li>
+          <li>Fast-turn fabrication at PCBWay or equivalent: ~$10/board, ~1 week</li>
         </ul>
 
-        <p class="investor-quote">"We have a functional node at close to the target footprint that you can hold in your hand. The power budget closes. Shrinking from 4 mm to 1 mm is a manufacturing transition, not a physics question — and that is what Phase II funds."</p>
+        <p class="investor-quote">"The breadboard proves the architecture; the 2-layer PCB proves the schematic. We de-risk the circuit before committing to expensive HDI design rules."</p>
       </div>
     </div>
 
-    <!-- Phase II -->
+    <!-- Phase 3 -->
     <div class="phase-row planned">
       <div class="connector"></div>
-      <div class="phase-node">II</div>
+      <div class="phase-node">3</div>
       <div class="phase-card">
         <div class="card-top">
           <div>
-            <div class="phase-node-inline">Phase II</div>
+            <div class="phase-node-inline">Phase 3</div>
+            <div class="phase-label">HDI Micro-PCBA</div>
+            <div class="phase-name">First Sellable Product &mdash; 25 mm Node</div>
+            <div class="unit-description">A rigid square roughly the size of a Triscuit (~1.5 &times; 1.5 inches), about as thick as a stack of 3&ndash;4 credit cards. nRF5340 + nRF7002 in WLCSP/QFN packages, solar film bonded to both faces. You can hold one between two fingers. This is the first deployable product.</div>
+          </div>
+          <div class="badge-group">
+            <span class="status-badge status-planned">Planned</span>
+          </div>
+        </div>
+
+        <div class="phase-meta">
+          <div class="meta-item">
+            <span class="meta-label">Estimated cost</span>
+            <span class="meta-value cost">~$2&ndash;5k</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Duration</span>
+            <span class="meta-value">6&ndash;10 weeks</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. completion</span>
+            <span class="meta-value">Jul&ndash;Aug 2026</span>
+          </div>
+        </div>
+
+        <p class="key-question">Does the power budget close when the node fits in the palm of your hand? Can it ship to defense and enterprise customers?</p>
+
+        <div class="list-label specs">Architecture</div>
+        <ul class="spec-list">
+          <li>25 &times; 25 mm HDI PCB; nRF5340 WLCSP + nRF7002 QFN &mdash; separate RF paths, hardware PTA</li>
+          <li>PMIC: BQ25570 DSBGA or e-peas AEM10941; supercap: SMD EDLC, 0.9 mm profile</li>
+          <li>Thin-film PV bonded to top and bottom faces; total thickness ~3.5&ndash;4.2 mm</li>
+          <li>Assembly: standard SMT pick-and-place at MacroFab or Screaming Circuits</li>
+        </ul>
+
+        <p class="investor-quote">"We have a functional node at target footprint that you can hold in your hand. The power budget closes. This ships to DoD programs and enterprise customers today. Shrinking from 4 mm to 1 mm is a manufacturing transition, not a physics question &mdash; and that is what Phase 4 funds."</p>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="phase-row planned">
+      <div class="connector"></div>
+      <div class="phase-node">4</div>
+      <div class="phase-card">
+        <div class="card-top">
+          <div>
+            <div class="phase-node-inline">Phase 4</div>
             <div class="phase-label">Bare Die on Flex</div>
             <div class="phase-name">Chip-on-Flex (CoF)</div>
-            <div class="unit-description">Shrinks from the Triscuit to a Wheat Thin (1 inch × 1 inch) — and from a stack of credit cards down to one. Flexible substrate instead of rigid PCB. Solar film bonded to both faces. The unit bends slightly. At this thickness and weight, it can tumble and drift on the wind when dropped from altitude — the first unit truly suited to scatter deployment.</div>
+            <div class="unit-description">Shrinks from the Triscuit to a Wheat Thin (1 inch &times; 1 inch) &mdash; and from a stack of credit cards down to one. Flexible substrate instead of rigid PCB. Solar film bonded to both faces. The unit bends slightly. At this thickness and weight, it can tumble and drift on the wind when dropped from altitude &mdash; the first unit truly suited to scatter deployment.</div>
           </div>
           <div class="badge-group">
             <span class="status-badge status-planned">Planned</span>
@@ -678,15 +716,15 @@
         <div class="phase-meta">
           <div class="meta-item">
             <span class="meta-label">Estimated one-time setup cost</span>
-            <span class="meta-value cost">$30–50k</span>
+            <span class="meta-value cost">$30&ndash;50k</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">Duration</span>
-            <span class="meta-value">3–6 months</span>
+            <span class="meta-value">3&ndash;6 months</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">Est. completion</span>
-            <span class="meta-value">Q4 2026 – Q1 2027</span>
+            <span class="meta-value">Q4 2026 &ndash; Q1 2027</span>
           </div>
         </div>
 
@@ -694,27 +732,27 @@
 
         <div class="list-label specs">Architecture</div>
         <ul class="spec-list">
-          <li>50 µm polyimide flex substrate with RDL antenna; bare dies via Micross / SemiDice</li>
+          <li>50 &micro;m polyimide flex substrate with RDL antenna; bare dies via Micross / SemiDice</li>
           <li>Energy storage: CAP-XX ultra-thin prismatic supercap pouch (~0.4 mm)</li>
           <li>Passives: Silicon Capacitors (SiCaps) or 01005 for zero Z-height impact</li>
           <li>Assembly at OSAT: QP Technologies or Promex Industries</li>
-          <li>Total target thickness: ~0.95–1.15 mm</li>
+          <li>Total target thickness: ~0.95&ndash;1.15 mm</li>
         </ul>
 
-        <p class="investor-quote">"Phase I proved the physics. Phase II proves the form factor. The supply chain here maps directly to the high-volume reel-to-reel manufacturing that hits $1/node."</p>
+        <p class="investor-quote">"Phase 3 proved the physics. Phase 4 proves the form factor. The supply chain here maps directly to the high-volume reel-to-reel manufacturing that hits $1/node."</p>
       </div>
     </div>
 
-    <!-- Phase III -->
+    <!-- Phase 5 -->
     <div class="phase-row planned">
-      <div class="phase-node">III</div>
+      <div class="phase-node">5</div>
       <div class="phase-card">
         <div class="card-top">
           <div>
-            <div class="phase-node-inline">Phase III</div>
-            <div class="phase-label">Custom Silicon</div>
+            <div class="phase-node-inline">Phase 5</div>
+            <div class="phase-label">Integrated Package</div>
             <div class="phase-name">Fan-Out Wafer-Level Packaging (FOWLP)</div>
-            <div class="unit-description">Visually identical to Phase II — a Wheat Thin, credit card thin — but now a single hermetically sealed package with no visible components, seams, or connectors. Both faces are photovoltaic. The only external surface is SiO₂ passivation. It looks and feels like a smooth, matte ceramic tile. Drop thousands from an aircraft; they self-organize into a mesh on landing. This is the production unit.</div>
+            <div class="unit-description">Visually identical to Phase 4 &mdash; a Wheat Thin, credit card thin &mdash; but now a single hermetically sealed package with no visible components, seams, or connectors. Both faces are photovoltaic. The only external surface is SiO&#x2082; passivation. It looks and feels like a smooth, matte ceramic tile. Drop thousands from an aircraft; they self-organize into a mesh on landing. This is the production unit.</div>
           </div>
           <div class="badge-group">
             <span class="status-badge status-planned">Planned</span>
@@ -724,7 +762,7 @@
         <div class="phase-meta">
           <div class="meta-item">
             <span class="meta-label">Estimated one-time setup cost</span>
-            <span class="meta-value cost">$500k – $2M+</span>
+            <span class="meta-value cost">$500k &ndash; $2M+</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">Unit cost at volume</span>
@@ -732,7 +770,7 @@
           </div>
           <div class="meta-item">
             <span class="meta-label">Duration</span>
-            <span class="meta-value">12–24 months</span>
+            <span class="meta-value">12&ndash;24 months</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">Est. completion</span>
@@ -744,13 +782,13 @@
 
         <div class="list-label specs">Architecture</div>
         <ul class="spec-list">
-          <li>Custom RF CMOS die (~5 mm², 180 nm) + MCU die + PMIC die embedded in mold compound</li>
+          <li>COTS radio dies (nRF5340 + nRF7002 bare die) + custom sensor/PMIC dies embedded in mold compound</li>
           <li>On-package RDL routing and 2.4 GHz RDL antenna; no flex PCB</li>
-          <li>Thin-film PV bonded at wafer scale to top and bottom; SiO₂ hermetic passivation</li>
+          <li>Thin-film PV bonded at wafer scale to top and bottom; SiO&#x2082; hermetic passivation</li>
           <li>Prototype partners: IMEC, CEA-Leti, IHP Microelectronics; production scale via ASE Group</li>
         </ul>
 
-        <p class="investor-quote">"Phases I and II retired the technical risks. Phase III is a pure capital-scaling play. This is the inflection point where NetAnywhere becomes a deployable macro-environmental platform."</p>
+        <p class="investor-quote">"Phases 3 and 4 retired the technical risks. Phase 5 is a pure capital-scaling play &mdash; same proven silicon in a wafer-level package that hits &lt;$1/node. This is the inflection point where NetAnywhere becomes a deployable macro-environmental platform."</p>
       </div>
     </div>
 
