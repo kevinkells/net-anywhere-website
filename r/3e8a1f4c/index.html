@@ -634,9 +634,9 @@
         <div class="card-top">
           <div>
             <div class="phase-node-inline">Phase 2</div>
-            <div class="phase-label">Nordic nRF5340+nRF7002 Surface-Mount (SMT) Board</div>
+            <div class="phase-label">Nordic nRF5340 Surface-Mount (SMT) Board</div>
             <div class="phase-name">Solar-Powered Node</div>
-            <div class="unit-description">A green circuit board about 2 inches square &mdash; larger than a Triscuit, smaller than a playing card &mdash; with nRF5340 + nRF7002 in QFN packages, a solar cell, and a supercap. No dev board overhead &mdash; just the chips and the power circuit. This is the first board where solar validation is meaningful.</div>
+            <div class="unit-description">A green circuit board about 2 inches square &mdash; larger than a Triscuit, smaller than a playing card &mdash; with nRF5340 only (802.15.4 mesh backbone), a solar cell, and a supercap. No Wi-Fi radio on the node &mdash; laptop/phone access stays on the carried gateway path, same as the field architecture. Inductor-less, PMIC-less direct-drive power (no BQ25570). No dev board overhead &mdash; real silicon and a minimal 2-layer layout. This is the first board where solar validation is meaningful.</div>
           </div>
           <div class="badge-group">
             <span class="status-badge status-planned">Planned</span>
@@ -654,18 +654,19 @@
           </div>
         </div>
 
-        <p class="key-question">Does the Nordic dual-chip node run on solar? This is the first board with no dev kit overhead &mdash; real chips, real power budget.</p>
+        <p class="key-question">Does the Nordic nRF5340-only node run on solar with direct-drive power? This is the first board with no dev kit overhead &mdash; real chip, real mesh radio, real power budget &mdash; and no Wi-Fi block to mask current draw.</p>
 
         <div class="list-label specs">Approach</div>
         <ul class="spec-list">
-          <li>~40&ndash;50 mm square, standard 2-layer FR4, nRF5340 + nRF7002 in QFN packages &mdash; no extra LEDs, regulators, or USB bridges</li>
-          <li>Solar cell + supercap + BQ25570 harvester on board &mdash; the complete power circuit</li>
+          <li>~40&ndash;50 mm square, standard 2-layer FR4 (JLCPCB-friendly), nRF5340 in QFN only &mdash; no nRF7002, no extra LEDs, no USB bridge</li>
+          <li>Direct-drive solar-to-storage path: solar cell + supercap, inductor-less and PMIC-less &mdash; BOM and assembly simplified vs. a harvester-PMIC stack</li>
+          <li>802.15.4 (Thread or other) only on-board; Wi-Fi for setup or backhaul stays off this unit (gateway / dongle path)</li>
           <li>First real solar validation: does the node stay alive on ambient light with no USB?</li>
           <li>Fully probeable &mdash; all test points accessible for debugging before committing to HDI miniaturization</li>
-          <li>Fast-turn fabrication at PCBWay or equivalent: ~$10/board, ~1 week</li>
+          <li>Fast-turn fab: ~$10/board, ~1 week at vendors such as PCBWay</li>
         </ul>
 
-        <p class="investor-quote">"Phase 1 proved the architecture on dev boards. Phase 2 proves the power budget on a real circuit board &mdash; no dev kit overhead, no wasted current. If the node runs on solar here, the physics are closed. Miniaturization is next."</p>
+        <p class="investor-quote">"Phase 1 proved coexistence and relay on Nordic dev kits. Phase 2 strips the Wi-Fi sidecar and proves the field-node power budget on a real SMT board &mdash; no dev kit overhead, no wasted current. If the nRF5340-only node runs on solar here, the physics are closed. Miniaturization is next."</p>
       </div>
     </div>
 
