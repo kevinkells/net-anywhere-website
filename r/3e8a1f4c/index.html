@@ -573,7 +573,7 @@
     </div>
 
     <!-- Phase 1 -->
-    <div class="phase-row next">
+    <div class="phase-row done">
       <div class="connector"></div>
       <div class="phase-node">1</div>
       <div class="phase-card">
@@ -585,7 +585,7 @@
             <div class="unit-description">Three breadboard nodes. Two phones &mdash; one connected to each end node over Wi-Fi. A relay node in the middle. The phones send a message. It travels Phone &rarr; Wi-Fi &rarr; 802.15.4 &rarr; relay &rarr; 802.15.4 &rarr; Wi-Fi &rarr; Phone. When it arrives, the architecture is proven.</div>
           </div>
           <div class="badge-group">
-            <span class="status-badge status-active">In Progress</span>
+            <span class="status-badge status-done">Done</span>
           </div>
         </div>
 
@@ -595,8 +595,8 @@
             <span class="meta-value">Apr 18, 2026</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">Duration</span>
-            <span class="meta-value">2&ndash;4 weeks</span>
+            <span class="meta-label">Closed</span>
+            <span class="meta-value">May 3, 2026</span>
           </div>
         </div>
 
@@ -607,22 +607,17 @@
           <li>All hardware arrived; full dev environment operational (nRF Connect SDK v2.9.0, west, Zephyr SDK, J-Link, usbipd WSL2 passthrough) <span class="measured">confirmed</span><span class="date">Apr 18, 2026</span></li>
           <li>Wi-Fi 6 (802.11ax) connection validated: 5 GHz, WPA2-PSK, RSSI &minus;22 dBm, DHCP assigned &mdash; clean boot on nRF5340-DK + nRF7002 EK <span class="measured">measured</span><span class="date">Apr 18, 2026</span></li>
           <li>Concurrent Wi-Fi + 802.15.4 (Thread) coexistence closed &mdash; G-N1a: Wi-Fi ~4.78 Mbps and Thread ~63 kbps running simultaneously on the same node <span class="measured">measured</span><span class="date">Apr 18, 2026</span></li>
-        </ul>
-
-        <div class="list-label inprogress">In progress</div>
-        <ul class="inprogress-list">
-          <li>G-N1b: three-node relay field demo &mdash; two laptops, three USB-powered nodes, static Thread credentials baked into firmware. Edge nodes serve a SoftAP web UI with message send + status pill; relay node bridges them over 802.15.4. Test closes when a message traverses the full path and the relay survives a power-cycle mid-test.</li>
+          <li>End-to-end relay confirmed &mdash; iPhone and Android connect via WPA2 SoftAP to each edge node; typed message traverses Phone &rarr; Wi-Fi &rarr; 802.15.4 &rarr; relay &rarr; 802.15.4 &rarr; Wi-Fi &rarr; Phone <span class="measured">measured</span><span class="date">May 3, 2026</span></li>
         </ul>
 
         <div class="list-label specs">Setup</div>
         <ul class="spec-list">
           <li>3&times; nRF5340-DK (Nordic dev kit, nRF5340, 802.15.4 backbone); 2&times; nRF7002 EK (Wi-Fi 6 shield, one per edge node)</li>
-          <li>Edge nodes run Wi-Fi SOFTAP + 802.15.4 simultaneously &mdash; the combination rated X (not supported) on the ESP32-C6</li>
-          <li>Relay node runs 802.15.4 only; bridges the two edges</li>
-          <li>Test passes when a message sent from Laptop 1 arrives at Laptop 2 with the relay node as the only path</li>
+          <li>Edge nodes run Wi-Fi SoftAP + 802.15.4 simultaneously &mdash; the combination rated X (not supported) on the ESP32-C6</li>
+          <li>Relay node runs 802.15.4 only; bridges the two edges over OpenThread</li>
         </ul>
 
-        <p class="investor-quote">"Phase 0 proved the range and identified the power problem &mdash; dev board overhead, not the physics. Phase 1 proves the product works: two laptops, out of range of each other, communicating through a relay node over radio. No infrastructure. Coexistence is closed on real hardware. The relay demo is next."</p>
+        <p class="investor-quote">"The architecture is proven on real hardware. Two phones, out of Wi-Fi range of each other, exchanged messages through an 802.15.4 relay node &mdash; no infrastructure required. Wi-Fi and 802.15.4 Thread run simultaneously on the same Nordic chip. The breadboard phase is done; the first custom PCB is next."</p>
       </div>
     </div>
 
