@@ -622,46 +622,61 @@
     </div>
 
     <!-- Phase 2 -->
-    <div class="phase-row planned">
+    <div class="phase-row next">
       <div class="connector"></div>
       <div class="phase-node">2</div>
       <div class="phase-card">
         <div class="card-top">
           <div>
             <div class="phase-node-inline">Phase 2</div>
-            <div class="phase-label">Nordic nRF5340 Surface-Mount (SMT) Board</div>
+            <div class="phase-label">Nordic SoC Module Carrier &mdash; Surface-Mount (SMT) Board</div>
             <div class="phase-name">Solar-Powered Node</div>
-            <div class="unit-description">A green circuit board about 2 inches square &mdash; larger than a Triscuit, smaller than a playing card &mdash; with nRF5340 only (802.15.4 mesh backbone), a solar cell, and a supercap. No Wi-Fi radio on the node &mdash; laptop/phone access stays on the carried gateway path, same as the field architecture. Inductor-less, PMIC-less direct-drive power (no BQ25570). No dev board overhead &mdash; real silicon and a minimal 2-layer layout. This is the first board where solar validation is meaningful.</div>
+            <div class="unit-description">A small green circuit board &mdash; the demonstrator variant is about 20 &times; 23 mm, smaller than a matchbook &mdash; carrying a pre-certified Nordic SoC module (802.15.4 mesh backbone, antenna on the module), a regulated direct-drive solar front end, and a low-profile programming pad. No Wi-Fi radio on the node &mdash; laptop/phone access stays on the carried gateway path, same as the field architecture. No battery, PMIC, supercap, external inductor, or external antenna. Real silicon on a minimal 2-layer layout, designed end-to-end in a reproducible toolchain and fab-ready.</div>
           </div>
           <div class="badge-group">
-            <span class="status-badge status-planned">Planned</span>
+            <span class="status-badge status-active">Active</span>
           </div>
         </div>
 
         <div class="phase-meta">
           <div class="meta-item">
-            <span class="meta-label">Estimated cost</span>
+            <span class="meta-label">Design complete</span>
+            <span class="meta-value">Jun 21, 2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. fab cost</span>
             <span class="meta-value cost">~$200–500</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">Duration</span>
-            <span class="meta-value">~5 weeks (design + fab)</span>
+            <span class="meta-label">Next</span>
+            <span class="meta-value">fab + solar bench validation</span>
           </div>
         </div>
 
-        <p class="key-question">Does the Nordic nRF5340-only node run on solar with direct-drive power? This is the first board with no dev kit overhead &mdash; real chip, real mesh radio, real power budget &mdash; and no Wi-Fi block to mask current draw.</p>
+        <p class="key-question">Does the Nordic-only node run on solar with regulated direct-drive power? This is the first board with no dev-kit overhead &mdash; real chip, real mesh radio, real power budget &mdash; and no Wi-Fi block to mask current draw.</p>
 
-        <div class="list-label specs">Approach</div>
-        <ul class="spec-list">
-          <li>~40&ndash;50 mm square, standard 2-layer FR4 (JLCPCB-friendly), nRF5340 in QFN only &mdash; no nRF7002, no extra LEDs, no USB bridge</li>
-          <li>Direct-drive solar-to-storage path: solar cell + supercap, inductor-less and PMIC-less &mdash; BOM and assembly simplified vs. a harvester-PMIC stack</li>
-          <li>802.15.4 (Thread or other) only on-board; Wi-Fi for setup or backhaul stays off this unit (gateway / dongle path)</li>
-          <li>First real solar validation: does the node stay alive on ambient light with no USB?</li>
-          <li>Fully probeable &mdash; all test points accessible for debugging before committing to HDI miniaturization</li>
-          <li>Fast-turn fab: ~$10/board, ~1 week at vendors such as PCBWay</li>
+        <div class="list-label achieved">Engineering complete (design + fab-ready)</div>
+        <ul class="achieved-list">
+          <li>Full reproducible KiCad pipeline: schematic (ERC 0) &rarr; PCB layout &rarr; auto-route (DRC 0 / 0 unconnected) &rarr; JLCPCB fab package (Gerbers, drill, BOM, pick-and-place)</li>
+          <li>Two board variants laid out and BOM-locked: an 18 &times; 36 mm bring-up board (full probe points) and a 20 &times; 23 mm form-factor demonstrator</li>
+          <li>Regulated direct-drive power tree: solar &rarr; ideal diode (reverse-block) &rarr; 100 &micro;F ceramic bulk &rarr; nanopower LDO &rarr; SoC &mdash; no battery, PMIC, supercap, or external inductor</li>
+          <li>BOM locked to in-stock JLCPCB / LCSC parts; module land-pattern built from the vendor's own library and 3D-verified</li>
         </ul>
 
-        <p class="investor-quote">"Phase 1 proved coexistence and relay on Nordic dev kits. Phase 2 strips the Wi-Fi sidecar and proves the field-node power budget on a real SMT board &mdash; no dev kit overhead, no wasted current. If the nRF5340-only node runs on solar here, the physics are closed. Miniaturization is next."</p>
+        <div class="list-label specs">Power budget &mdash; simulated, not yet bench-measured</div>
+        <ul class="spec-list">
+          <li>SPICE (ngspice): 100 &micro;F holds the regulated rail flat (sag ~0) across &minus;20&hellip;60 &deg;C; cold dark-start stays above the brownout floor with &ge;10 &micro;F</li>
+          <li>On-module DC/DC and 2.4 GHz antenna; 32.768 kHz crystal for low-power idle</li>
+        </ul>
+
+        <div class="list-label inprogress">Next</div>
+        <ul class="inprogress-list">
+          <li>Fabricate + assemble at JLCPCB (module consign-/hand-placed) and bring up the board</li>
+          <li>First real solar validation: does the node stay alive on ambient/outdoor light with no USB?</li>
+          <li>Independent pre-fab layout review before committing the run</li>
+        </ul>
+
+        <p class="investor-quote">"Phase 1 proved coexistence and relay on Nordic dev kits. Phase 2 strips the dev-kit overhead and the Wi-Fi sidecar down to a real SMT solar node &mdash; designed end-to-end, design-rule-clean, and BOM-locked on two board variants. Boards go to fab next; if the node runs on solar here, the field-node physics are closed."</p>
       </div>
     </div>
 
