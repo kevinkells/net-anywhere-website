@@ -15,8 +15,8 @@
 
     :root {
       --bg: #38bdf8;
-      --surface: transparent;
-      --surface-strong: transparent;
+      --surface: rgba(255, 255, 255, 0.14);
+      --surface-strong: rgba(255, 255, 255, 0.2);
       --border: rgba(255, 255, 255, 0.28);
       --text: #ffffff;
       --text-muted: rgba(255, 255, 255, 0.92);
@@ -238,14 +238,14 @@
       flex: 1;
       border-radius: 12px;
       border: 1px solid var(--border);
-      background: transparent;
+      background: var(--surface);
       padding: 1.5rem 1.75rem;
       margin-bottom: 1.5rem;
-      backdrop-filter: none;
+      backdrop-filter: blur(8px);
     }
 
     .phase-row.planned .phase-card {
-      background: transparent;
+      background: var(--surface);
       border-color: var(--border);
       opacity: 1;
       filter: none;

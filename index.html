@@ -15,7 +15,7 @@
     :root {
       --bg: #38bdf8;
       --bg-deep: #0ea5e9;
-      --surface: transparent;
+      --surface: rgba(255, 255, 255, 0.14);
       --border: rgba(255, 255, 255, 0.28);
       --text: #ffffff;
       --text-muted: rgba(255, 255, 255, 0.75);
@@ -156,14 +156,14 @@
       width: 140px;
       height: 140px;
       border-radius: 12px;
-      background: transparent;
+      background: var(--surface);
       border: 2px solid rgba(255, 255, 255, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       box-shadow: none;
-      backdrop-filter: none;
+      backdrop-filter: blur(8px);
     }
 
     .chip::before {
@@ -225,8 +225,8 @@
       padding: 2rem;
       border-radius: 12px;
       border: 1px solid var(--border);
-      background: transparent;
-      backdrop-filter: none;
+      background: var(--surface);
+      backdrop-filter: blur(8px);
     }
 
     .feature-icon {
