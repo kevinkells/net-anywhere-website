@@ -15,12 +15,12 @@
 
     :root {
       --bg: #38bdf8;
-      --surface: rgba(3, 30, 60, 0.72);
-      --surface-strong: rgba(3, 30, 60, 0.85);
-      --border: rgba(255, 255, 255, 0.15);
+      --surface: transparent;
+      --surface-strong: transparent;
+      --border: rgba(255, 255, 255, 0.28);
       --text: #ffffff;
-      --text-muted: rgba(255, 255, 255, 0.78);
-      --text-dim: rgba(255, 255, 255, 0.45);
+      --text-muted: rgba(255, 255, 255, 0.92);
+      --text-dim: rgba(255, 255, 255, 0.75);
 
       --status-done-bg: rgba(52, 211, 153, 0.22);
       --status-done-border: rgba(52, 211, 153, 0.5);
@@ -34,9 +34,9 @@
       --status-next-border: rgba(255, 255, 255, 0.28);
       --status-next-text: rgba(255, 255, 255, 0.85);
 
-      --status-planned-bg: rgba(255, 255, 255, 0.07);
-      --status-planned-border: rgba(255, 255, 255, 0.15);
-      --status-planned-text: rgba(255, 255, 255, 0.5);
+      --status-planned-bg: rgba(255, 255, 255, 0.14);
+      --status-planned-border: rgba(255, 255, 255, 0.4);
+      --status-planned-text: rgba(255, 255, 255, 0.95);
 
       --measured-bg: rgba(99, 179, 237, 0.25);
       --measured-border: rgba(147, 210, 247, 0.5);
@@ -72,6 +72,37 @@
       color: var(--text);
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-actions a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.35rem 0.9rem;
+      background: transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .nav-actions a:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    .nav-actions a.request-brief {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.55);
+      font-weight: 600;
+    }
+
     .confidential-tag {
       font-size: 0.75rem;
       font-weight: 500;
@@ -81,7 +112,7 @@
       border: 1px solid var(--border);
       border-radius: 100px;
       padding: 0.25rem 0.75rem;
-      background: rgba(255,255,255,0.08);
+      background: transparent;
     }
 
     /* --- Header --- */
@@ -166,8 +197,8 @@
     }
 
     .phase-row.planned .phase-node {
-      background: rgba(255,255,255,0.15);
-      border: 2px solid rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.25);
+      border: 2px solid rgba(255,255,255,0.7);
       color: #ffffff;
       text-shadow: 0 1px 3px rgba(0,0,0,0.4);
     }
@@ -197,9 +228,9 @@
     }
 
     .phase-row.planned .phase-node-inline {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.35);
-      color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.5);
+      color: #ffffff;
     }
 
     /* Card */
@@ -207,15 +238,17 @@
       flex: 1;
       border-radius: 12px;
       border: 1px solid var(--border);
-      background: var(--surface);
+      background: transparent;
       padding: 1.5rem 1.75rem;
       margin-bottom: 1.5rem;
-      backdrop-filter: blur(6px);
+      backdrop-filter: none;
     }
 
     .phase-row.planned .phase-card {
-      background: var(--surface);
+      background: transparent;
       border-color: var(--border);
+      opacity: 1;
+      filter: none;
     }
 
     .card-top {
@@ -500,7 +533,11 @@
 
   <nav>
     <span class="logo">NetAnywhere</span>
-    <span class="confidential-tag">Confidential</span>
+    <div class="nav-actions">
+      <span class="confidential-tag">Confidential</span>
+      <a class="request-brief" href="mailto:info@net-anywhere.com?subject=Request%20for%20brief">Request for brief</a>
+      <a href="mailto:info@net-anywhere.com">Contact</a>
+    </div>
   </nav>
 
   <div class="page-header">

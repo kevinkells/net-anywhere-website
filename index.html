@@ -15,8 +15,8 @@
     :root {
       --bg: #38bdf8;
       --bg-deep: #0ea5e9;
-      --surface: rgba(255, 255, 255, 0.12);
-      --border: rgba(255, 255, 255, 0.2);
+      --surface: transparent;
+      --border: rgba(255, 255, 255, 0.28);
       --text: #ffffff;
       --text-muted: rgba(255, 255, 255, 0.75);
       --accent: #ffffff;
@@ -65,15 +65,37 @@
 
     .logo span { color: var(--accent); }
 
-    nav a {
-      color: var(--text-muted);
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-actions a {
+      color: var(--text);
       text-decoration: none;
       font-size: 0.875rem;
       font-weight: 500;
-      transition: color 0.2s;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.35rem 0.9rem;
+      background: transparent;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
     }
 
-    nav a:hover { color: var(--accent); }
+    .nav-actions a:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.45);
+      color: var(--accent);
+    }
+
+    .nav-actions a.request-brief {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.55);
+      font-weight: 600;
+    }
 
     /* --- Hero --- */
     .hero {
@@ -134,14 +156,14 @@
       width: 140px;
       height: 140px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(8px);
+      box-shadow: none;
+      backdrop-filter: none;
     }
 
     .chip::before {
@@ -203,7 +225,8 @@
       padding: 2rem;
       border-radius: 12px;
       border: 1px solid var(--border);
-      background: var(--surface);
+      background: transparent;
+      backdrop-filter: none;
     }
 
     .feature-icon {
@@ -300,7 +323,10 @@
   <div class="content">
     <nav>
       <div class="logo">Net<span>Anywhere</span></div>
-      <a href="mailto:info@net-anywhere.com">Contact</a>
+      <div class="nav-actions">
+        <a class="request-brief" href="mailto:info@net-anywhere.com?subject=Request%20for%20brief">Request for brief</a>
+        <a href="mailto:info@net-anywhere.com">Contact</a>
+      </div>
     </nav>
 
     <section class="hero">
@@ -353,7 +379,7 @@
     <section class="cta">
       <h2>Interested?</h2>
       <p>We're in early development. Reach out to learn more or discuss partnership opportunities.</p>
-      <a class="cta-link" href="mailto:info@net-anywhere.com">Get in Touch</a>
+      <a class="cta-link" href="mailto:info@net-anywhere.com?subject=Request%20for%20brief">Request for brief</a>
     </section>
 
     <footer>
